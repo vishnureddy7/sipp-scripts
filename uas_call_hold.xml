@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<scenario name="UAS Codec Change Scenario">
+<scenario name="UAS Callhold Scenario">
  
  <recv request="INVITE" crlf="true">
  </recv>
