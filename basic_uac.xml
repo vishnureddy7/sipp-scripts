@@ -7,7 +7,7 @@
 INVITE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
 Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
-To: bob <sip:[service]@[remote_ip]:[remote_port]>
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>
 Call-ID:[call_id]
 Cseq: 1 INVITE
 Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
@@ -43,7 +43,7 @@ a=sendrecv
 ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
 Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
-To: bob <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 1 ACK
 Max-Forwards: 70
@@ -60,7 +60,7 @@ Content-Length: 0
 BYE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
 Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice  <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
-To: bob  <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 2 BYE
 Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
