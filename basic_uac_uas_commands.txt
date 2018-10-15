@@ -1,4 +1,0 @@
-sipp -sf basic_uac.xml -s bob -i 10.70.52.187 10.70.52.187:1213 -m 1 -p 3121 -mp 31217
-
-sipp -sf basic_uas.xml -s bob -i 10.70.52.187 -m 1 -p 1213 -mp 12137
-
