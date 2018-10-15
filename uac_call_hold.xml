@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<scenario name="UAC Codec Change Scenario">
+<scenario name="UAC Call Hold Scenario">
  
  <send>
 	 <![CDATA[
@@ -71,10 +71,10 @@ v=0
 o=alice 817931 5394 IN IP[local_ip_type] [local_ip]
 s=-
 t=0 0
-m=audio [media_port] RTP/AVP 3
+m=audio [media_port] RTP/AVP 0
 c=IN IP[media_ip_type] [media_ip]
-a=rtpmap:3 GSM/8000
-a=sendrecv
+a=rtpmap:0 PCMU/8000
+a=sendonly
 
 	]]>
  </send>
@@ -102,6 +102,56 @@ Content-Length: 0
  </send>
  
  <pause milliseconds="5000"/>
+
+ <send retrans="500">
+	<![CDATA[
+
+INVITE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+Call-ID:[call_id]
+Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
+CSeq: 3 INVITE
+Max-Forwards: 70
+Content-Type: application/sdp
+Content-Length:[len]
+
+v=0
+o=alice 817931 5395 IN IP[local_ip_type] [local_ip]
+s=-
+t=0 0
+m=audio [media_port] RTP/AVP 0
+c=IN IP[media_ip_type] [media_ip]
+a=rtpmap:0 PCMU/8000
+a=sendrecv
+
+	]]>
+
+ </send>
+
+ <recv response="100" optional="true">
+ </recv>
+
+ <recv response="200">
+ </recv>
+
+ <send>
+	<![CDATA[
+
+ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+Call-ID:[call_id]
+CSeq: 3 ACK
+Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Content-Length: 0
+
+	]]>
+
+ </send>
  
  <send retrans="500">
 	<![CDATA[
@@ -111,7 +161,7 @@ Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: bob <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
-Cseq: 3 BYE
+Cseq: 4 BYE
 Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
 Max-Forwards: 70
 Content-Length: 0
