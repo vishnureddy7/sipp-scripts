@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<scenario name="Basic UAC scenario">
+<scenario name="UAC Early Media scenario">
  
  <send>
 	 <![CDATA[
@@ -10,7 +10,7 @@ From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: [service] <sip:[service]@[remote_ip]:[remote_port]>
 Call-ID:[call_id]
 Cseq: 1 INVITE
-Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
 Max-Forwards: 70
 Content-Type: application/sdp
 Content-Length:[len]
@@ -36,7 +36,7 @@ a=sendrecv
  
  <nop>
   <action>
-        <exec play_pcap_audio="pcap_files/g711uLaw-breakfree-9sec.pcap"/>
+        <exec play_pcap_audio="pcap_files/g711u_9sec.pcap"/>
   </action>
  </nop>
 
@@ -52,6 +52,7 @@ From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 1 ACK
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
 Max-Forwards: 70
 Content-Length: 0
 
@@ -69,7 +70,7 @@ From: alice  <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 2 BYE
-Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]
 Max-Forwards: 70
 Content-Length: 0
 
