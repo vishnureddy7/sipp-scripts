@@ -27,7 +27,7 @@ SIP/2.0 301 Moved Permanently
 [last_To:];tag=[call_number]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@10.54.81.66:1213;transport=[transport]>
+Contact: <sip:[service]@[remote_ip]:[remote_port];transport=[transport]>
 Content-Length: 0
 
   ]]>
