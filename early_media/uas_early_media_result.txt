@@ -1,0 +1,12 @@
+                                 Messages  Retrans   Timeout   Unexpected-Msg
+  ----------> INVITE             1         0         0         0
+
+  <---------- 100                1         0
+  <---------- 180                1         0
+              [ NOP ]
+  [   5000ms] Pause              1                             0
+  <---------- 200                1         0         0
+  ----------> ACK         E-RTD1 1         0         0         0
+  [   5000ms] Pause              1                             0
+  ----------> BYE                1         0         0         0
+  <---------- 200                1         0
