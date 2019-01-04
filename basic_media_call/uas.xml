@@ -27,7 +27,7 @@ SIP/2.0 180 Ringing
 [last_To:];tag=[call_number]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Length: 0
 
 	]]>
@@ -42,7 +42,7 @@ SIP/2.0 200 OK
 [last_To:];tag=[call_number]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Type: application/sdp
 Content-Length:[len]
 
@@ -63,7 +63,7 @@ a=sendrecv
 
  <nop>
   <action>
- 	<exec play_pcap_audio="pcap_files/g711uLaw-breakfree-9sec.pcap"/>
+ 	<exec play_pcap_audio="pcap_files/g711u_9sec.pcap"/>
   </action>
  </nop>
 
@@ -79,7 +79,7 @@ SIP/2.0 200 OK
 [last_To:]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Length: 0
 
   ]]>
