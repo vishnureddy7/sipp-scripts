@@ -10,7 +10,7 @@ From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: [service] <sip:[service]@[remote_ip]:[remote_port]>
 Call-ID:[call_id]
 Cseq: 1 INVITE
-Contact: <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
 Max-Forwards: 70
 Content-Type: application/sdp
 Content-Length:[len]
@@ -45,6 +45,7 @@ From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
 To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 1 ACK
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
 Max-Forwards: 70
 Content-Length: 0
 

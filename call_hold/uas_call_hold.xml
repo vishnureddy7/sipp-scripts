@@ -42,7 +42,7 @@ SIP/2.0 200 OK
 [last_To:];tag=[call_number]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Type: application/sdp
 Content-Length:[len]
 
@@ -73,7 +73,7 @@ SIP/2.0 200 OK
 [last_To:]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Type: application/sdp
 Content-Length:[len]
 
@@ -104,7 +104,7 @@ SIP/2.0 200 OK
 [last_To:]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Type: application/sdp
 Content-Length:[len]
 
@@ -135,7 +135,7 @@ SIP/2.0 200 OK
 [last_To:]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[local_ip]:[local_port];transport=[transport]>
+Contact: [service] <sip:[service]@[local_ip]:[local_port];transport=[transport]>
 Content-Length: 0
 
   ]]>
