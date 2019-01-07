@@ -74,8 +74,6 @@ a=sendrecv
        ]]>
     </send>
 
-    <pause milliseconds="5000"/>
-
     <send>
 		<![CDATA[
 
