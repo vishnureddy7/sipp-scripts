@@ -59,7 +59,10 @@ a=sendrecv
   </send>
 
   <recv response="200" rtd="true"> 
-  </recv-->
+  </recv>
+
+  <recv response="200" rtd="true">
+  </recv>
 
   <send>
 		<![CDATA[
