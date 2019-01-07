@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+<scenario name="Prack Example - UAC">
+
+  <send retrans="500">
+		<![CDATA[
+INVITE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>
+Call-ID: [call_id]
+CSeq: 1 INVITE
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Subject: Prack Example
+Supported: 100rel
+Allow: INVITE, OPTIONS, ACK, BYE, CANCEL, INFO, NOTIFY, MESSAGE 
+Content-Length:0
+
+		]]>
+  </send>
+
+  <recv response="100" optional="true">
+  </recv>
+
+  <recv response="180" rtd="true">
+	  <action>
+		  <ereg regexp="[0-9].*" search_in="hdr" header="RSeq:" check_it="true" assign_to="1" />
+	  </action>
+  </recv>
+
+  <send>
+		<![CDATA[
+
+PRACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+Call-ID: [call_id]
+Cseq: [cseq] PRACK
+RAck: [$1] 1 INVITE
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Subject: Prack Example
+Content-Length: [len]
+ 
+v=0
+o=alice 817931 5393 IN IP[local_ip_type] [local_ip]
+s=-
+t=0 0
+m=audio [media_port] RTP/AVP 0 3
+c=IN IP[media_ip_type] [media_ip]
+a=rtpmap:0 PCMU/8000
+a=rtpmap:3 GSM/8000
+a=sendrecv
+
+		]]>
+  </send>
+
+  <recv response="200" rtd="true"> 
+  </recv-->
+
+  <send>
+		<![CDATA[
+
+ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+Call-ID: [call_id]
+CSeq: 1 ACK
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Subject: Prack Example
+Content-Length: 0
+
+		]]>
+  </send>
+
+  <pause milliseconds="5000"/>
+
+  <send>
+		<![CDATA[
+
+BYE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+Call-ID: [call_id]
+CSeq: 2 BYE
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Subject: Prack Example
+Content-Length: 0
+
+		]]>
+  </send>
+
+  <recv response="200" rtd="true">
+  </recv>
+
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>
