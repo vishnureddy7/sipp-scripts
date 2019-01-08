@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<scenario name="Basic UAC scenario">
+<scenario name="UAC scenario">
  
  <send>
 	 <![CDATA[
@@ -30,7 +30,47 @@ a=sendrecv
 
  <recv response="100" optional="true">
  </recv>
- 
+
+ <recv response="301" rtd="true">
+	<action>
+		<ereg regexp=".*" search_in="hdr" header="Contact:" check_it="true" assign_to="1">
+		<ereg regexp=":[a-zA-Z0-9]*<" search_in="hdr" header="Contact:" check_it="true" assign_to="displayname">
+		<ereg regexp=":[a-zA-Z0-9]*@" search_in="hdr" header="Contact:" check_it="true" assign_to="username">
+		<ereg regexp="@[0-9.]*:" search_in="hdr" header="Contact:" check_it="true" assign_to="red_ip">
+		<ereg regexp=":[0-9]*>" search_in="hdr" header="Contact:" check_it="true" assign_to="red_port">
+	</action>
+ </recv>
+
+ <send>
+     <![CDATA[
+
+INVITE sip:[username]@[red_ip]:[red_port] SIP/2.0
+Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
+To: [displayname] <sip:[username]@[red_ip]:[red_port]>
+Call-ID:[call_id]
+Cseq: 1 INVITE
+Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
+Max-Forwards: 70
+Content-Type: application/sdp
+Content-Length:[len]
+
+v=0
+o=alice 817931 5393 IN IP[local_ip_type] [local_ip]
+s=-
+t=0 0
+m=audio [media_port] RTP/AVP 0 3
+c=IN IP[media_ip_type] [media_ip]
+a=rtpmap:0 PCMU/8000
+a=rtpmap:3 GSM/8000
+a=sendrecv
+
+    ]]>
+ </send>
+
+ <recv response="100" optional="true">
+ </recv>
+
  <recv response="180" optional="true">
  </recv>
  
@@ -40,10 +80,10 @@ a=sendrecv
  <send>
 	 <![CDATA[
 
-ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+ACK sip:[username]@[red_ip]:[red_port] SIP/2.0
 Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
-To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+To: [display_name] <sip:[username]@[red_ip]:[red_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 1 ACK
 Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>
@@ -58,10 +98,10 @@ Content-Length: 0
  <send retrans="500">
 	<![CDATA[
 
-BYE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+BYE sip:[username]@[red_ip]:[red_port] SIP/2.0
 Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
 From: alice  <sip:alice@[local_ip]:[local_port]>;tag=[call_number]
-To: [service] <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+To: [display_name] <sip:[username]@[red_ip]:[red_port]>[peer_tag_param]
 Call-ID:[call_id]
 Cseq: 2 BYE
 Contact: alice <sip:alice@[local_ip]:[local_port];transport=[transport]>

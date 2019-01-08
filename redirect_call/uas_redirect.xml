@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<scenario name="Basic UAS scenario">
+<scenario name="Redirect UAS scenario">
  
  <recv request="INVITE" crlf="true">
  </recv>
@@ -27,7 +27,7 @@ SIP/2.0 301 Moved Permanently
 [last_To:];tag=[call_number]
 [last_Call-ID:]
 [last_CSeq:]
-Contact: <sip:[service]@[remote_ip]:[remote_port];transport=[transport]>
+Contact: [service] <sip:[service]@[remote_ip]:[remote_port]>
 Content-Length: 0
 
   ]]>
